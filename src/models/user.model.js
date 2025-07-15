@@ -39,6 +39,7 @@ const userSchema = new Schema(
 
 // here the normal password is converted to the string of hash
 // before saving it to the database
+// here hashing is done using bcrypt
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 10);
